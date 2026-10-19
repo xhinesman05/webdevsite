@@ -56,10 +56,10 @@
           <p>If a large response comes first, a smaller later response can wait behind it. This application-level ordering constraint is often described as head-of-line blocking. Opening additional connections can provide parallelism, but adds connection overhead.</p>
           <p>The limitation helps explain the next major version. A page with many resources benefits from being able to interleave their delivery rather than forcing every response through one ordered sequence.</p>
           <pre>
-            <code>One pipelined HTTP/1.1 connection, simplified:
-Requests:   A, then B
-Responses:  A must precede B
-
+            <code>One pipelined HTTP/1.1 connection, simplified:
+Requests:   A, then B
+Responses:  A must precede B
+
 A slow first response can delay a ready second response.</code>
           </pre>
           <p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9112">RFC 9112: HTTP/1.1</a>.</p>
@@ -77,11 +77,11 @@ A slow first response can delay a ready second response.</code>
           <p>Header compression with HPACK reduces repeated field information. This is separate from compressing a response body such as an HTML file. The protocol changes how both control information and content travel.</p>
           <p>A stream identifier keeps the pieces associated with the correct exchange. The client can reconstruct several logical responses even though their frames share a connection.</p>
           <pre>
-            <code>One HTTP/2 connection, simplified:
-Stream 1: HTML frames
-Stream 3: stylesheet frames
-Stream 5: image frames
-
+            <code>One HTTP/2 connection, simplified:
+Stream 1: HTML frames
+Stream 3: stylesheet frames
+Stream 5: image frames
+
 Frames from these streams may be interleaved.</code>
           </pre>
           <p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a>.</p>

@@ -63,12 +63,12 @@
           <p>A response starts with its version and status. Content-Type describes the representation, so a client can distinguish HTML from another format. The example below omits fields and body details to make that structure easier to follow.</p>
           <p>HTTP/2 and HTTP/3 carry the same basic information through binary framing. A readable HTTP/1.1 example explains the concepts, but it is not a literal picture of every version's wire format.</p>
           <pre>
-            <code>GET /lesson.html HTTP/1.1
-Host: example.com
-
-HTTP/1.1 200 OK
-Content-Type: text/html; charset=utf-8
-
+            <code>GET /lesson.html HTTP/1.1
+Host: example.com
+
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+
 [HTML document body]</code>
           </pre>
           <p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages">MDN: HTTP messages</a>, <a href="https://www.rfc-editor.org/rfc/rfc9112">RFC 9112: HTTP/1.1</a>.</p>
@@ -79,9 +79,9 @@ Content-Type: text/html; charset=utf-8
           <p>Safe methods have read-only intended semantics. Idempotent methods have the same intended effect when an identical request is repeated. PUT is idempotent, although repeating it can still produce different response messages.</p>
           <p>These distinctions matter when a connection fails. Retrying a retrieval is different from repeating a purchase submission. I would choose methods according to the action's meaning rather than treating every request as interchangeable.</p>
           <pre>
-            <code>GET /articles/7       retrieve an article
-HEAD /articles/7      retrieve response metadata
-POST /orders         process a new order submission
+            <code>GET /articles/7       retrieve an article
+HEAD /articles/7      retrieve response metadata
+POST /orders         process a new order submission
 PUT /profiles/7      replace that profile's state</code>
           </pre>
           <p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods">MDN: Request methods</a>.</p>
@@ -92,9 +92,9 @@ PUT /profiles/7      replace that profile's state</code>
           <p>A 200 response commonly accompanies a successful retrieval. A 404 means the server did not find a current representation of the target, while a 500 reports an unexpected server condition. The number gives software a predictable signal beyond the page's visible wording.</p>
           <p>I would read the exact code before changing a broken page. An incorrect file path and an unavailable application can look similar to a visitor, but they call for different repairs.</p>
           <pre>
-            <code>200 OK                  successful request
-301 Moved Permanently   resource has a new permanent URI
-404 Not Found           target representation not found
+            <code>200 OK                  successful request
+301 Moved Permanently   resource has a new permanent URI
+404 Not Found           target representation not found
 500 Internal Server Error   unexpected server condition</code>
           </pre>
           <p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">MDN: Status codes</a>.</p>
@@ -105,10 +105,10 @@ PUT /profiles/7      replace that profile's state</code>
           <p>Cache-Control supplies instructions. max-age describes freshness lifetime. no-cache permits storage but requires successful validation before reuse, while no-store directs a cache not to store the response.</p>
           <p>I would give a versioned stylesheet and a private account response different policies. A faster page is useful, but a cache must not reuse personal content as though it were a public image.</p>
           <pre>
-            <code>Cache-Control: public, max-age=3600
-An eligible shared response can remain fresh for one hour.
-
-Cache-Control: no-store
+            <code>Cache-Control: public, max-age=3600
+An eligible shared response can remain fresh for one hour.
+
+Cache-Control: no-store
 A cache must not store this response.</code>
           </pre>
           <p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9111">RFC 9111: HTTP Caching</a>.</p>
@@ -119,10 +119,10 @@ A cache must not store this response.</code>
           <p>If the condition indicates that the cached copy is still usable, a 304 Not Modified response allows reuse without sending the full representation again. Validation still involves an exchange, so it differs from reusing a response that remains fresh.</p>
           <p>For a text-heavy site, this avoids repeatedly transferring identical content. It also shows why a status in the 3xx range does not always mean that the visitor must follow a new address.</p>
           <pre>
-            <code>Earlier response:  ETag: "lesson-v2"
-Later request:     If-None-Match: "lesson-v2"
-Unchanged result:  304 Not Modified
-
+            <code>Earlier response:  ETag: "lesson-v2"
+Later request:     If-None-Match: "lesson-v2"
+Unchanged result:  304 Not Modified
+
 The stored representation supplies the content.</code>
           </pre>
           <p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9111">RFC 9111: HTTP Caching</a>, <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">MDN: Status codes</a>.</p>
@@ -133,10 +133,10 @@ The stored representation supplies the content.</code>
           <p>Cookie attributes control parts of that behavior. Secure restricts transmission to secure connections, while HttpOnly prevents access through JavaScript's document.cookie. SameSite helps limit when cookies accompany requests originating from another site.</p>
           <p>A cookie should not be treated as harmless simply because it is small. An exposed session identifier can matter as much as other login information, and a site should store only the information it needs.</p>
           <pre>
-            <code>Illustrative session cookie:
-Set-Cookie: session=example; Secure; HttpOnly; SameSite=Lax
-
-A later applicable request may include:
+            <code>Illustrative session cookie:
+Set-Cookie: session=example; Secure; HttpOnly; SameSite=Lax
+
+A later applicable request may include:
 Cookie: session=example</code>
           </pre>
           <p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies">MDN: HTTP cookies</a>.</p>
@@ -154,10 +154,10 @@ Cookie: session=example</code>
           <p>CORS uses response fields to describe permitted cross-origin access. Some requests require a preliminary OPTIONS exchange called a preflight. The server's policy and the browser's enforcement work together.</p>
           <p>CORS is not a replacement for authentication. A developer should still protect private resources on the server. I would investigate a cross-origin browser error as a policy issue rather than assuming that the API is offline.</p>
           <pre>
-            <code>A server may explicitly allow a requesting origin:
-Access-Control-Allow-Origin: https://example.com
-
-This permits relevant browser access under CORS rules.
+            <code>A server may explicitly allow a requesting origin:
+Access-Control-Allow-Origin: https://example.com
+
+This permits relevant browser access under CORS rules.
 It does not identify or authenticate an individual user.</code>
           </pre>
           <p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">MDN: CORS</a>.</p>
