@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300" role="img" aria-labelledby="title desc">
+<title id="title">An HTTP request and response</title><desc id="desc">The browser sends GET /lesson.html to the server. The server replies with a 200 status, header fields, and a body.</desc>
+<rect width="960" height="300" fill="#f1f5f8"/>
+<rect x="25" y="80" width="190" height="135" rx="3" fill="#fff" stroke="#6a8da5" stroke-width="2"/>
+<rect x="745" y="80" width="190" height="135" rx="3" fill="#fff" stroke="#6a8da5" stroke-width="2"/>
+<g font-family="Arial, sans-serif" fill="#192e43" text-anchor="middle"><text x="120" y="140" font-size="28">Browser</text><text x="120" y="175" font-size="20">client</text><text x="840" y="140" font-size="28">Server</text><text x="840" y="175" font-size="20">resource host</text><text x="480" y="73" font-size="22">Request: GET /lesson.html</text><text x="480" y="246" font-size="22">Response: 200 + headers + body</text></g>
+<path d="M235 110H715m-14-10 14 10-14 10" fill="none" stroke="#175788" stroke-width="4"/>
+<path d="M725 190H245m14-10-14 10 14 10" fill="none" stroke="#175788" stroke-width="4"/>
+</svg>

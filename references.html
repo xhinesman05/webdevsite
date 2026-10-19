@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sources and learning resources supporting the HTTP research.">
+  <meta name="author" content="Xavier Hinesman">
+  <title>References and further reading | HTTP Explained</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <!-- The skip link lets keyboard users move past the shared navigation. -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-name" href="index.html">HTTP Explained</a>
+      <p class="site-description">The exchanges behind the page</p>
+      <!-- Every page keeps the same menu and identifies its current destination. -->
+      <nav aria-label="Main navigation"><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="history.html">History</a></li>
+<li><a href="how-http-works.html">How HTTP works</a></li>
+<li><a href="versions.html">Modern versions</a></li>
+<li><a href="concepts.html">Key concepts</a></li>
+<li><a href="references.html" aria-current="page">References</a></li>
+<li><a href="about.html">About</a></li>
+</ul></nav>
+    </div>
+  </header>
+  <main id="main-content" tabindex="-1">
+    <div class="page-heading">
+      <p class="eyebrow">IT 3203 · Web technology research</p>
+      <h1>References and further reading</h1>
+      <p class="lead">Standards explain the rules. Developer guides help connect those rules with a working page.</p>
+    </div>
+    <article class="reading-width"><p>The research uses standards for protocol details and developer documentation for accessible explanations. All sources were consulted on October 18, 2026. The older specifications explain historical behavior; the 2022 documents describe the modern organization of HTTP standards.</p>
+<section><h2>Beginner explanations</h2>
+<ul class="reference-list">
+<li>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview">MDN: Overview of HTTP</a><p>MDN contributors. Client and server roles, resources, and intermediaries.</p>
+</li>
+<li>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages">MDN: HTTP messages</a><p>MDN contributors. Message structure and differences between versions.</p>
+</li>
+<li>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods">MDN: Request methods</a><p>MDN contributors. Method meanings, safety, and idempotency.</p>
+</li>
+<li>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">MDN: Status codes</a><p>MDN contributors. Categories and individual response codes.</p>
+</li>
+<li>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Evolution_of_HTTP">MDN: Evolution of HTTP</a><p>MDN contributors. Historical context and the role of SPDY.</p>
+</li>
+</ul></section><section><h2>Original specifications and historical documents</h2>
+<ul class="reference-list">
+<li>
+<a href="https://www.w3.org/Protocols/HTTP/AsImplemented.html">W3C: The early HTTP protocol</a><p>Tim Berners-Lee. W3C historical description of the original protocol.</p>
+</li>
+<li>
+<a href="https://www.rfc-editor.org/rfc/rfc1945">RFC 1945: HTTP/1.0</a><p>Berners-Lee, Fielding, and Frystyk. May 1996. Informational description of HTTP/1.0.</p>
+</li>
+<li>
+<a href="https://www.rfc-editor.org/rfc/rfc2068.html">RFC 2068: HTTP/1.1 (1997)</a><p>Fielding et al. January 1997. The original HTTP/1.1 specification, retained here for historical context.</p>
+</li>
+<li>
+<a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a><p>Fielding, Nottingham, and Reschke, editors. June 2022. Common HTTP meaning and architecture.</p>
+</li>
+<li>
+<a href="https://www.rfc-editor.org/rfc/rfc9111">RFC 9111: HTTP Caching</a><p>Fielding, Nottingham, and Reschke, editors. June 2022. Storage, freshness, validation, and cache directives.</p>
+</li>
+<li>
+<a href="https://www.rfc-editor.org/rfc/rfc9112">RFC 9112: HTTP/1.1</a><p>Fielding, Nottingham, and Reschke, editors. June 2022. HTTP/1.1 syntax and connection management.</p>
+</li>
+<li>
+<a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a><p>Thomson and Benfield, editors. June 2022. HTTP/2 framing and streams.</p>
+</li>
+<li>
+<a href="https://www.rfc-editor.org/rfc/rfc9114">RFC 9114: HTTP/3</a><p>Bishop, editor. June 2022. HTTP/3 mapping onto QUIC.</p>
+</li>
+<li>
+<a href="https://www.rfc-editor.org/rfc/rfc9000">RFC 9000: QUIC</a><p>Iyengar and Thomson, editors. May 2021. QUIC transport and independent streams.</p>
+</li>
+</ul></section><section><h2>Application behavior and investigation</h2>
+<ul class="reference-list">
+<li>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies">MDN: HTTP cookies</a><p>MDN contributors. Cookie fields, sessions, and security attributes.</p>
+</li>
+<li>
+<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Transport_Layer_Security">MDN: Transport Layer Security</a><p>MDN contributors. Encryption, integrity, and authentication in transit.</p>
+</li>
+<li>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">MDN: CORS</a><p>MDN contributors. Browser cross-origin access and preflight exchanges.</p>
+</li>
+<li>
+<a href="https://developer.chrome.com/docs/devtools/network/">Chrome: Network panel overview</a><p>Chrome for Developers. Instructions for investigating resource requests.</p>
+</li>
+</ul></section><section><h2>About the examples</h2>
+<p>Code excerpts are simplified illustrations written for this project. They are not recordings of actual network traffic. The exchange illustration is original, and its description follows the request-and-response model explained by MDN and RFC 9110.</p></section></article>
+  </main>
+  <!-- The course link and class-project note appear consistently across the site. -->
+  <footer class="site-footer">
+    <p>Created by Xavier Hinesman · Fall 2026</p>
+    <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Key milestones in HTTP history, including HTTP/0.9, HTTP/1.0, and HTTP/1.1.">
+  <meta name="author" content="Xavier Hinesman">
+  <title>The development of HTTP | HTTP Explained</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <!-- The skip link lets keyboard users move past the shared navigation. -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-name" href="index.html">HTTP Explained</a>
+      <p class="site-description">The exchanges behind the page</p>
+      <!-- Every page keeps the same menu and identifies its current destination. -->
+      <nav aria-label="Main navigation"><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="history.html" aria-current="page">History</a></li>
+<li><a href="how-http-works.html">How HTTP works</a></li>
+<li><a href="versions.html">Modern versions</a></li>
+<li><a href="concepts.html">Key concepts</a></li>
+<li><a href="references.html">References</a></li>
+<li><a href="about.html">About</a></li>
+</ul></nav>
+    </div>
+  </header>
+  <main id="main-content" tabindex="-1">
+    <div class="page-heading">
+      <p class="eyebrow">IT 3203 · Web technology research</p>
+      <h1>The development of HTTP</h1>
+      <p class="lead">Each major change addressed a limitation in the web that came before it.</p>
+    </div>
+    <article class="reading-width"><section><h2>The early web and HTTP/0.9</h2>
+<p>Tim Berners-Lee developed the web at CERN around 1989–1991. HTTP supplied a way to retrieve linked documents, alongside HTML, an early browser, and server software. Its initial setting was much smaller than today's public web.</p>
+<p>The early protocol later called HTTP/0.9 used a simple GET line followed by a document response. It lacked the status line and header fields that later versions use to explain what came back.</p>
+<p>That simplicity made an initial document exchange possible, but it gave software little information about errors or different content types. A larger web needed a more expressive message format.</p>
+<pre><code>Illustrative HTTP/0.9 request:
+GET /welcome.html
+
+The response contains the document itself,
+without a modern status line or header section.</code></pre>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Evolution_of_HTTP">MDN: Evolution of HTTP</a>, <a href="https://www.w3.org/Protocols/HTTP/AsImplemented.html">W3C: The early HTTP protocol</a>.</p></section><section><h2>HTTP/1.0 and richer representations</h2>
+<p>RFC 1945 documented HTTP/1.0 in May 1996. Its authors were Tim Berners-Lee, Roy Fielding, and Henrik Frystyk Nielsen. The document described existing practice rather than presenting HTTP/1.0 as an Internet Standard.</p>
+<p>Version information, response status codes, and header fields made exchanges easier to interpret. Content-Type allowed the response to identify formats beyond HTML, supporting the growing variety of resources used by web pages.</p>
+<p>The basic connection model still carried a cost. A connection generally served one request and response, so loading a page with several resources involved repeated setup. Later work addressed that overhead while preserving the richer messages.</p>
+<pre><code>HTTP/1.0 200 OK
+Content-Type: image/png
+
+[image data]
+
+The header identifies the representation's media type.</code></pre>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc1945">RFC 1945: HTTP/1.0</a>.</p></section><section><h2>HTTP/1.1 and reusable connections</h2>
+<p>The first HTTP/1.1 specification, RFC 2068, appeared in January 1997. It developed a more explicit standard for a web that was already using multiple resource types and many server implementations.</p>
+<p>Persistent connections let several exchanges reuse a connection. The Host field identified the requested host, which helped servers distinguish sites sharing an address. Chunked transfer coding supported message bodies whose final length was not known at the start.</p>
+<p>These changes made the protocol more suitable for larger pages. Reusing a connection reduced repeated work, although it did not remove every delay created by the order of requests and responses.</p>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc2068.html">RFC 2068: HTTP/1.1 (1997)</a>, <a href="https://www.rfc-editor.org/rfc/rfc9112">RFC 9112: HTTP/1.1</a>.</p></section>
+    <section><h2>Milestones at a glance</h2>
+    <!-- A caption and scoped headers identify the relationships in this data table. -->
+    <div class="table-wrap"><table>
+<caption>Publication milestones and their significance</caption>
+<thead><tr>
+<th scope="col">Period</th>
+<th scope="col">Development</th>
+<th scope="col">Why it matters</th>
+</tr></thead>
+<tbody>
+    <tr>
+<th scope="row">1989–1991</th>
+<td>Early web and HTTP/0.9</td>
+<td>Linked documents could be retrieved through a simple request.</td>
+</tr>
+    <tr>
+<th scope="row">May 1996</th>
+<td>HTTP/1.0, RFC 1945</td>
+<td>Status codes and fields documented richer exchanges.</td>
+</tr>
+    <tr>
+<th scope="row">January 1997</th>
+<td>HTTP/1.1, RFC 2068</td>
+<td>Reusable connections reduced repeated setup.</td>
+</tr>
+    <tr>
+<th scope="row">2015</th>
+<td>Original HTTP/2 standard</td>
+<td>Multiplexing changed how responses share a connection.</td>
+</tr>
+    <tr>
+<th scope="row">June 2022</th>
+<td>HTTP/3, RFC 9114</td>
+<td>QUIC supplied a different transport for HTTP.</td>
+</tr>
+    </tbody>
+</table></div>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc1945">RFC 1945: HTTP/1.0</a>, <a href="https://www.rfc-editor.org/rfc/rfc2068.html">RFC 2068: HTTP/1.1 (1997)</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Evolution_of_HTTP">MDN: Evolution of HTTP</a>, <a href="https://www.rfc-editor.org/rfc/rfc9114">RFC 9114: HTTP/3</a>.</p></section><p class="next-reading">Continue: <a href="how-http-works.html">How HTTP works</a></p></article>
+  </main>
+  <!-- The course link and class-project note appear consistently across the site. -->
+  <footer class="site-footer">
+    <p>Created by Xavier Hinesman · Fall 2026</p>
+    <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
+  </footer>
+</body>
+</html>

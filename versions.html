@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare HTTP/1.1, HTTP/2, HTTP/3, and the role of QUIC.">
+  <meta name="author" content="Xavier Hinesman">
+  <title>Modern HTTP versions | HTTP Explained</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <!-- The skip link lets keyboard users move past the shared navigation. -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-name" href="index.html">HTTP Explained</a>
+      <p class="site-description">The exchanges behind the page</p>
+      <!-- Every page keeps the same menu and identifies its current destination. -->
+      <nav aria-label="Main navigation"><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="history.html">History</a></li>
+<li><a href="how-http-works.html">How HTTP works</a></li>
+<li><a href="versions.html" aria-current="page">Modern versions</a></li>
+<li><a href="concepts.html">Key concepts</a></li>
+<li><a href="references.html">References</a></li>
+<li><a href="about.html">About</a></li>
+</ul></nav>
+    </div>
+  </header>
+  <main id="main-content" tabindex="-1">
+    <div class="page-heading">
+      <p class="eyebrow">IT 3203 · Web technology research</p>
+      <h1>Modern HTTP versions</h1>
+      <p class="lead">Familiar request meanings remain useful even as the delivery mechanism changes.</p>
+    </div>
+    <article class="reading-width"><section><h2>HTTP/1.1's remaining ordering problem</h2>
+<p>HTTP/1.1 can pipeline requests, meaning a client sends another request before the earlier response finishes. The server must still send the corresponding responses in their request order.</p>
+<p>If a large response comes first, a smaller later response can wait behind it. This application-level ordering constraint is often described as head-of-line blocking. Opening additional connections can provide parallelism, but adds connection overhead.</p>
+<p>The limitation helps explain the next major version. A page with many resources benefits from being able to interleave their delivery rather than forcing every response through one ordered sequence.</p>
+<pre><code>One pipelined HTTP/1.1 connection, simplified:
+Requests:   A, then B
+Responses:  A must precede B
+
+A slow first response can delay a ready second response.</code></pre>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9112">RFC 9112: HTTP/1.1</a>.</p></section><section><h2>SPDY and the move toward HTTP/2</h2>
+<p>As pages accumulated scripts, images, and other resources, connection overhead became harder to ignore. Google's experimental SPDY protocol explored ways to improve delivery and helped provide a basis for HTTP/2.</p>
+<p>HTTP/2 was standardized in 2015. It retained the familiar meaning of methods, statuses, and fields while changing how messages were encoded and carried. Developers could continue writing normal resources rather than replacing the whole web application model.</p>
+<p>That continuity is a major reason the history matters. A newer delivery mechanism could address performance problems while existing resource addresses and application behavior remained understandable.</p>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Evolution_of_HTTP">MDN: Evolution of HTTP</a>, <a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a>.</p></section><section><h2>HTTP/2 frames and multiplexed streams</h2>
+<p>HTTP/2 divides communication into binary frames associated with streams. Several streams can share one connection, allowing parts of different responses to be interleaved. A slow application response no longer has to force every response into HTTP/1.1's ordering pattern.</p>
+<p>Header compression with HPACK reduces repeated field information. This is separate from compressing a response body such as an HTML file. The protocol changes how both control information and content travel.</p>
+<p>A stream identifier keeps the pieces associated with the correct exchange. The client can reconstruct several logical responses even though their frames share a connection.</p>
+<pre><code>One HTTP/2 connection, simplified:
+Stream 1: HTML frames
+Stream 3: stylesheet frames
+Stream 5: image frames
+
+Frames from these streams may be interleaved.</code></pre>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a>.</p></section><section><h2>Why TCP still matters in HTTP/2</h2>
+<p>HTTP/2 multiplexing addresses response ordering at the HTTP layer, but its streams share a TCP connection. TCP delivers an ordered byte stream. Missing data can delay delivery of later received bytes until the gap is repaired.</p>
+<p>As a result, packet loss can hold up data belonging to several HTTP/2 streams. This is a transport-level constraint, even when the individual HTTP responses are logically independent.</p>
+<p>I would distinguish those layers before saying that HTTP/2 completely removes head-of-line blocking. It improves one ordering problem while still depending on the behavior of the transport beneath it.</p>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a>, <a href="https://www.rfc-editor.org/rfc/rfc9114">RFC 9114: HTTP/3</a>.</p></section><section><h2>QUIC supplies a different transport</h2>
+<p>QUIC, standardized in RFC 9000 in 2021, is a transport protocol carried over UDP. It adds reliable delivery, congestion control, and multiple streams rather than assuming that an application can simply abandon missing data.</p>
+<p>Ordered delivery occurs within a stream. Missing data on one stream does not inherently prevent another stream from making progress, although shared congestion and network conditions can still affect the connection overall.</p>
+<p>QUIC also uses connection identifiers to support a connection across certain address changes. That can help when a device's network path changes. It does not mean every application will survive every network interruption.</p>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9000">RFC 9000: QUIC</a>.</p></section><section><h2>HTTP/3 maps HTTP onto QUIC</h2>
+<p>RFC 9114 defined HTTP/3 in June 2022. It maps HTTP exchanges onto QUIC streams and uses QPACK for field compression. Its design accommodates transport behavior that differs from HTTP/2's ordered TCP connection.</p>
+<p>The request's purpose remains recognizable. A GET still requests a representation, and a 404 still communicates a missing target representation. The version changes the delivery mechanism while preserving shared HTTP semantics.</p>
+<p>HTTP/3 can help avoid blocking unrelated streams behind missing transport data. It is not automatically faster for every site or network. Deployment conditions, connection setup, and the resources being transferred still affect the result.</p>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9114">RFC 9114: HTTP/3</a>, <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>, <a href="https://www.rfc-editor.org/rfc/rfc9000">RFC 9000: QUIC</a>.</p></section>
+    <section><h2>Comparing the delivery models</h2>
+<div class="table-wrap"><table>
+<caption>Major version differences</caption>
+<thead><tr>
+<th scope="col">Version</th>
+<th scope="col">Transport</th>
+<th scope="col">Message delivery</th>
+<th scope="col">Important limit</th>
+</tr></thead>
+<tbody>
+    <tr>
+<th scope="row">HTTP/1.1</th>
+<td>TCP</td>
+<td>Textual messages, reusable connections</td>
+<td>Pipelined responses remain ordered.</td>
+</tr>
+    <tr>
+<th scope="row">HTTP/2</th>
+<td>TCP</td>
+<td>Binary frames, multiplexed streams</td>
+<td>A gap in TCP delivery can delay several streams.</td>
+</tr>
+    <tr>
+<th scope="row">HTTP/3</th>
+<td>QUIC over UDP</td>
+<td>HTTP frames on QUIC streams</td>
+<td>Network congestion can still affect the shared connection.</td>
+</tr>
+    </tbody>
+</table></div>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9112">RFC 9112: HTTP/1.1</a>, <a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a>, <a href="https://www.rfc-editor.org/rfc/rfc9114">RFC 9114: HTTP/3</a>, <a href="https://www.rfc-editor.org/rfc/rfc9000">RFC 9000: QUIC</a>.</p></section><section><h2>Current standards and future priorities</h2>
+<p>The 2022 specifications separate shared semantics, caching, and version-specific message delivery. RFC 9110 defines common meaning, while RFC 9111 covers caching and RFCs 9112–9114 describe the major versions. This organization makes the shared foundation easier to distinguish from transport details.</p>
+<p>I expect continued work to focus on efficient delivery under imperfect network conditions and on compatibility with existing applications. That is an interpretation of the design problems addressed by HTTP/2, HTTP/3, and QUIC, rather than a promise about a future numbered version.</p>
+<p>For my own development work, I would first verify correctness, then measure performance. Reducing unnecessary resources and using sensible caching can matter alongside the protocol negotiated by the host.</p>
+<p class="source-note">Read more: <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>, <a href="https://www.rfc-editor.org/rfc/rfc9111">RFC 9111: HTTP Caching</a>, <a href="https://www.rfc-editor.org/rfc/rfc9112">RFC 9112: HTTP/1.1</a>, <a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a>, <a href="https://www.rfc-editor.org/rfc/rfc9114">RFC 9114: HTTP/3</a>, <a href="https://www.rfc-editor.org/rfc/rfc9000">RFC 9000: QUIC</a>.</p></section><p class="next-reading">Continue: <a href="concepts.html">Key concepts</a></p></article>
+  </main>
+  <!-- The course link and class-project note appear consistently across the site. -->
+  <footer class="site-footer">
+    <p>Created by Xavier Hinesman · Fall 2026</p>
+    <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
+  </footer>
+</body>
+</html>

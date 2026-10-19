@@ -1,0 +1,83 @@
+/* Shared typography and box sizing apply to all pages through tag selectors. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #f5f6f8; color: #222d3a; font-family: Arial, Helvetica, sans-serif; font-size: 1rem; line-height: 1.7; }
+a { color: #175788; text-underline-offset: .2em; }
+/* Hover and keyboard focus provide equivalent visible feedback. */
+a:hover { color: #093653; text-decoration-thickness: .16em; }
+a:focus-visible { outline: 3px solid #bb6a13; outline-offset: 4px; }
+h1, h2, h3 { color: #182b3e; line-height: 1.25; }
+h1 { margin: .2em 0 .5em; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.025em; max-width: 24ch; }
+h2 { margin: 0 0 .7em; font-size: 1.5rem; }
+h3 { font-size: 1.1rem; margin: 1.5em 0 .5em; }
+p { margin: 0 0 1.2em; }
+li { padding-left: .2em; margin-bottom: .45em; }
+/* Class selectors describe shared site components. Flexbox wraps the menu. */
+.site-header { background: #192e43; color: #fff; border-bottom: 5px solid #82a9be; }
+.header-inner { max-width: 1180px; margin: auto; padding: 1.5rem 2rem 0; }
+.site-name { color: #fff; font-size: 1.5rem; font-weight: bold; text-decoration: none; }
+.site-name:hover { color: #fff; text-decoration: underline; }
+.site-description { color: #c6d7e5; font-size: .9rem; margin: .1rem 0 1.2rem; }
+nav ul { display: flex; flex-wrap: wrap; list-style: none; gap: .15rem 1.35rem; margin: 0; padding: 0; }
+nav li { margin: 0; padding: 0; }
+nav a { display: block; color: #e2ecf4; padding: .65rem 0 .8rem; text-decoration: none; border-bottom: 3px solid transparent; }
+nav a:hover, nav a[aria-current="page"] { color: #fff; border-bottom-color: #fff; }
+/* The ID selector styles the shared main destination, also used by the skip link. */
+#main-content { max-width: 1180px; margin: 0 auto; padding: 2.75rem 2rem 3.5rem; background: #fff; min-height: 65vh; }
+#main-content:focus { outline: none; }
+.page-heading { border-bottom: 1px solid #d6dee6; margin-bottom: 2.25rem; padding-bottom: 1.35rem; }
+.eyebrow { color: #536878; font-size: .85rem; margin: 0 0 .5rem; }
+.lead { color: #4b5e6d; max-width: 70ch; font-size: 1.15rem; margin-bottom: .4rem; }
+.reading-width { max-width: 82ch; }
+section { margin-top: 2.75rem; }
+article > section:first-child { margin-top: 0; }
+.source-note { color: #53606b; font-size: .87rem; border-left: 3px solid #b7cbd9; padding: .4rem 0 .4rem 1rem; margin: 1rem 0 2rem; }
+/* Grid supplies a main article and a modest reading guide on the homepage. */
+.home-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 3rem; align-items: start; }
+.reading-note { padding: 1.35rem; background: #edf3f7; border-top: 3px solid #527e9c; }
+.reading-note h2 { font-size: 1.2rem; }
+.reading-note p, .term-list { font-size: .95rem; }
+.term-list { padding-left: 1.1rem; }
+figure { margin: 2rem 0 1rem; }
+img { max-width: 100%; height: auto; display: block; }
+figcaption { font-size: .85rem; color: #53606b; margin-top: .65rem; }
+.contents-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 3rem; padding-left: 1.3rem; }
+.contents-grid li { padding: .4rem .3rem .2rem; border-top: 1px solid #d6dee6; }
+.contents-grid a { font-weight: bold; font-size: 1.1rem; }
+.contents-grid p { font-size: .95rem; margin: .4rem 0; }
+pre { padding: 1rem 1.25rem; background: #eef3f6; border: 1px solid #cbd8e2; overflow-x: auto; font-size: .9rem; line-height: 1.6; }
+code { font-family: Consolas, monospace; }
+.table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+caption { text-align: left; font-weight: bold; padding-bottom: .75rem; }
+th, td { border: 1px solid #cbd5df; padding: .75rem; text-align: left; vertical-align: top; }
+thead { background: #edf3f7; }
+tbody th { min-width: 8rem; }
+.concept { padding: 1.4rem 0; border-top: 1px solid #d6dee6; }
+.concept dt { font-size: 1.35rem; font-weight: bold; color: #182b3e; }
+.concept dd { margin: .65rem 0 0; }
+.example { background: #f1f5f8; padding: .8rem 1rem; font-size: .95rem; }
+.reference-list { padding-left: 1.25rem; }
+.reference-list li { margin-bottom: 1.5rem; overflow-wrap: anywhere; }
+.reference-list p { color: #53606b; font-size: .95rem; margin: .25rem 0; }
+.profile-list { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: .7rem 1.5rem; }
+.profile-list dt { font-weight: bold; }
+.profile-list dd { margin: 0; }
+.next-reading { border-top: 1px solid #d6dee6; padding-top: 1.4rem; margin-top: 2.5rem; }
+.site-footer { max-width: 1180px; margin: auto; padding: 1.75rem 2rem; border-top: 1px solid #d6dee6; font-size: .85rem; color: #53606b; }
+.site-footer p { margin: 0 0 .4rem; }
+.skip-link { position: absolute; top: -8rem; left: 1rem; background: #fff; padding: .7rem 1rem; z-index: 2; }
+.skip-link:focus { top: .5rem; }
+/* A small-screen rule keeps the existing menu and reading order available. */
+@media (max-width: 760px) {
+ .header-inner { padding: 1.25rem 1.2rem 0; }
+ #main-content { padding: 2rem 1.2rem; }
+ nav ul { gap: 0 1rem; }
+ nav a { font-size: .9rem; padding: .55rem 0; }
+ .home-layout, .contents-grid { grid-template-columns: minmax(0, 1fr); }
+ .home-layout { gap: 1.5rem; }
+ .profile-list { grid-template-columns: minmax(0, 1fr); gap: .2rem; }
+ .profile-list dd { margin-bottom: .8rem; }
+ .site-footer { padding: 1.5rem 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

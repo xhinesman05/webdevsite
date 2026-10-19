@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An introduction to HTTP, its history, and the exchanges behind modern websites.">
+  <meta name="author" content="Xavier Hinesman">
+  <title>HTTP and the evolution of the web | HTTP Explained</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <!-- The skip link lets keyboard users move past the shared navigation. -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-name" href="index.html">HTTP Explained</a>
+      <p class="site-description">The exchanges behind the page</p>
+      <!-- Every page keeps the same menu and identifies its current destination. -->
+      <nav aria-label="Main navigation"><ul>
+<li><a href="index.html" aria-current="page">Home</a></li>
+<li><a href="history.html">History</a></li>
+<li><a href="how-http-works.html">How HTTP works</a></li>
+<li><a href="versions.html">Modern versions</a></li>
+<li><a href="concepts.html">Key concepts</a></li>
+<li><a href="references.html">References</a></li>
+<li><a href="about.html">About</a></li>
+</ul></nav>
+    </div>
+  </header>
+  <main id="main-content" tabindex="-1">
+    <div class="page-heading">
+      <p class="eyebrow">IT 3203 · Web technology research</p>
+      <h1>HTTP and the evolution of the web</h1>
+      <p class="lead">A closer look at the protocol that carries web resources between clients and servers.</p>
+    </div>
+    
+    <div class="home-layout">
+      <article>
+        <h2>Overview</h2>
+        <p>I chose HTTP because almost every visible part of a website depends on an exchange that the visitor never sees. A browser needs a way to request its HTML, load a stylesheet, and retrieve the images that give the content meaning.</p>
+        <p>This site examines HTTP as one component of the web. It follows the protocol's development and explains how newer versions address delivery problems while keeping familiar request meanings. The goal is to make that process understandable without assuming a background in networking.</p>
+        <p>The most useful distinction is between what a request means and how it travels. A GET request still asks for a representation, even when the connection uses a newer protocol version.</p>
+        <figure>
+          <img src="http-exchange.svg" width="960" height="300" alt="A browser sends a GET request to a server, and the server returns a response containing a status, header fields, and a body.">
+          <figcaption>A simplified exchange. One page can require separate requests for its document, stylesheet, and images. Illustration by Xavier Hinesman, based on the HTTP request-and-response model.</figcaption>
+        </figure>
+        <p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview">MDN: Overview of HTTP</a>, <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>.</p>
+      </article>
+      <aside class="reading-note" aria-labelledby="starting-point">
+        <h2 id="starting-point">A starting point</h2>
+        <p>Begin with the history, then read how an exchange works. The modern versions page explains why newer delivery mechanisms were needed.</p>
+        <h3>Key terms</h3>
+        <ul class="term-list">
+<li>Client and server</li>
+<li>Resource</li>
+<li>Request and response</li>
+<li>Method</li>
+<li>Status code</li>
+<li>Cache</li>
+<li>Multiplexing</li>
+</ul>
+        <p><a href="concepts.html">Read the seven definitions</a></p>
+      </aside>
+    </div>
+    <section id="contents">
+      <h2>Table of contents</h2>
+      <ol class="contents-grid">
+<li>
+<a href="history.html">History</a><p>Follow the milestones from the early web to reusable HTTP/1.1 connections.</p>
+</li>
+<li>
+<a href="how-http-works.html">How HTTP works</a><p>Read requests and responses, then examine methods, status codes, and caching.</p>
+</li>
+<li>
+<a href="versions.html">Modern versions</a><p>Compare HTTP/2 and HTTP/3 and the transport problems they address.</p>
+</li>
+<li>
+<a href="concepts.html">Key concepts</a><p>Review seven terms that make the rest of the site easier to follow.</p>
+</li>
+<li>
+<a href="references.html">References</a><p>Explore the standards and developer documentation behind this research.</p>
+</li>
+<li>
+<a href="about.html">About</a><p>Meet the student behind the project and read about its purpose.</p>
+</li>
+</ol>
+    </section>
+  </main>
+  <!-- The course link and class-project note appear consistently across the site. -->
+  <footer class="site-footer">
+    <p>Created by Xavier Hinesman · Fall 2026</p>
+    <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
+  </footer>
+</body>
+</html>

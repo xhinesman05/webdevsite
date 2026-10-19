@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Understand HTTP messages, methods, status codes, caching, cookies, and secure connections.">
+  <meta name="author" content="Xavier Hinesman">
+  <title>How HTTP works | HTTP Explained</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <!-- The skip link lets keyboard users move past the shared navigation. -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-name" href="index.html">HTTP Explained</a>
+      <p class="site-description">The exchanges behind the page</p>
+      <!-- Every page keeps the same menu and identifies its current destination. -->
+      <nav aria-label="Main navigation"><ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="history.html">History</a></li>
+<li><a href="how-http-works.html" aria-current="page">How HTTP works</a></li>
+<li><a href="versions.html">Modern versions</a></li>
+<li><a href="concepts.html">Key concepts</a></li>
+<li><a href="references.html">References</a></li>
+<li><a href="about.html">About</a></li>
+</ul></nav>
+    </div>
+  </header>
+  <main id="main-content" tabindex="-1">
+    <div class="page-heading">
+      <p class="eyebrow">IT 3203 · Web technology research</p>
+      <h1>How HTTP works</h1>
+      <p class="lead">A request names an action and a resource. The response describes what happened.</p>
+    </div>
+    <article class="reading-width"><section><h2>HTTP's role in a website</h2>
+<p>HTTP means Hypertext Transfer Protocol. It operates at the application layer, where a client requests a resource and a server responds. A browser is one kind of client, although programs that retrieve data can use HTTP as well.</p>
+<p>HTML describes document structure, CSS controls presentation, and HTTP carries representations of resources between systems. An HTTP response might contain an HTML page, an image, or structured data rather than a complete website.</p>
+<p>I find this separation useful when diagnosing a problem. Correct HTML cannot repair a missing server resource. A working response also does not guarantee that the page's content or layout is useful.</p>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview">MDN: Overview of HTTP</a>, <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>.</p></section><section><h2>Reading a request and response</h2>
+<p>In HTTP/1.1, a request starts with a method, a target, and a protocol version. Header fields add information such as the intended host. A blank line separates those fields from any message body.</p>
+<p>A response starts with its version and status. Content-Type describes the representation, so a client can distinguish HTML from another format. The example below omits fields and body details to make that structure easier to follow.</p>
+<p>HTTP/2 and HTTP/3 carry the same basic information through binary framing. A readable HTTP/1.1 example explains the concepts, but it is not a literal picture of every version's wire format.</p>
+<pre><code>GET /lesson.html HTTP/1.1
+Host: example.com
+
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+
+[HTML document body]</code></pre>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages">MDN: HTTP messages</a>, <a href="https://www.rfc-editor.org/rfc/rfc9112">RFC 9112: HTTP/1.1</a>.</p></section><section><h2>Methods describe the requested action</h2>
+<p>GET requests a representation of a resource. HEAD requests similar response information without response content. POST asks a resource to process supplied content, while PUT requests replacement of the target resource's state.</p>
+<p>Safe methods have read-only intended semantics. Idempotent methods have the same intended effect when an identical request is repeated. PUT is idempotent, although repeating it can still produce different response messages.</p>
+<p>These distinctions matter when a connection fails. Retrying a retrieval is different from repeating a purchase submission. I would choose methods according to the action's meaning rather than treating every request as interchangeable.</p>
+<pre><code>GET /articles/7       retrieve an article
+HEAD /articles/7      retrieve response metadata
+POST /orders         process a new order submission
+PUT /profiles/7      replace that profile's state</code></pre>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods">MDN: Request methods</a>.</p></section><section><h2>Status codes make outcomes recognizable</h2>
+<p>The first digit groups a response into a broad category. Codes beginning with 1 provide information, 2 indicate success, 3 concern redirection, 4 indicate client errors, and 5 indicate server errors.</p>
+<p>A 200 response commonly accompanies a successful retrieval. A 404 means the server did not find a current representation of the target, while a 500 reports an unexpected server condition. The number gives software a predictable signal beyond the page's visible wording.</p>
+<p>I would read the exact code before changing a broken page. An incorrect file path and an unavailable application can look similar to a visitor, but they call for different repairs.</p>
+<pre><code>200 OK                  successful request
+301 Moved Permanently   resource has a new permanent URI
+404 Not Found           target representation not found
+500 Internal Server Error   unexpected server condition</code></pre>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">MDN: Status codes</a>.</p></section><section><h2>Caching avoids unnecessary transfers</h2>
+<p>A cache stores a response so that a later request may reuse it. Browser caches serve an individual user, while shared caches can serve multiple users. Correct reuse reduces traffic and avoids repeatedly downloading unchanged resources.</p>
+<p>Cache-Control supplies instructions. max-age describes freshness lifetime. no-cache permits storage but requires successful validation before reuse, while no-store directs a cache not to store the response.</p>
+<p>I would give a versioned stylesheet and a private account response different policies. A faster page is useful, but a cache must not reuse personal content as though it were a public image.</p>
+<pre><code>Cache-Control: public, max-age=3600
+An eligible shared response can remain fresh for one hour.
+
+Cache-Control: no-store
+A cache must not store this response.</code></pre>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9111">RFC 9111: HTTP Caching</a>.</p></section><section><h2>Validation checks whether a copy changed</h2>
+<p>A stored response can have a validator such as an ETag. When that copy needs validation, the client can send If-None-Match with the saved tag. The server compares it with the current representation.</p>
+<p>If the condition indicates that the cached copy is still usable, a 304 Not Modified response allows reuse without sending the full representation again. Validation still involves an exchange, so it differs from reusing a response that remains fresh.</p>
+<p>For a text-heavy site, this avoids repeatedly transferring identical content. It also shows why a status in the 3xx range does not always mean that the visitor must follow a new address.</p>
+<pre><code>Earlier response:  ETag: "lesson-v2"
+Later request:     If-None-Match: "lesson-v2"
+Unchanged result:  304 Not Modified
+
+The stored representation supplies the content.</code></pre>
+<p class="source-note">Read more: <a href="https://www.rfc-editor.org/rfc/rfc9111">RFC 9111: HTTP Caching</a>, <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">MDN: Status codes</a>.</p></section><section><h2>Cookies connect otherwise separate requests</h2>
+<p>HTTP is stateless, so an exchange does not inherently establish an ongoing user session. A server can send Set-Cookie, and the browser can include an applicable Cookie field in later requests. Applications can use that identifier to connect requests with stored session data.</p>
+<p>Cookie attributes control parts of that behavior. Secure restricts transmission to secure connections, while HttpOnly prevents access through JavaScript's document.cookie. SameSite helps limit when cookies accompany requests originating from another site.</p>
+<p>A cookie should not be treated as harmless simply because it is small. An exposed session identifier can matter as much as other login information, and a site should store only the information it needs.</p>
+<pre><code>Illustrative session cookie:
+Set-Cookie: session=example; Secure; HttpOnly; SameSite=Lax
+
+A later applicable request may include:
+Cookie: session=example</code></pre>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies">MDN: HTTP cookies</a>.</p></section><section><h2>HTTPS protects the exchange in transit</h2>
+<p>HTTPS uses HTTP with a secure transport. TLS provides encryption, integrity protection, and authentication of the server through its certificate. These protections make it harder for an intermediary to read or alter an exchange.</p>
+<p>Encryption does not establish that a website's claims are honest. A malicious site can also use HTTPS. The protection concerns the connection and the authenticated endpoint, while application security still depends on how the site handles information.</p>
+<p>For a real form, I would use HTTPS and validate submitted values on the server. Choosing POST alone does not encrypt the message, and changing the HTTP version does not repair an unsafe application.</p>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Transport_Layer_Security">MDN: Transport Layer Security</a>, <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>.</p></section><section><h2>APIs, origins, and CORS</h2>
+<p>An application can use HTTP to retrieve structured data from an API. A page on one origin may request data from another, but the browser's same-origin protections affect whether its script may read the response.</p>
+<p>CORS uses response fields to describe permitted cross-origin access. Some requests require a preliminary OPTIONS exchange called a preflight. The server's policy and the browser's enforcement work together.</p>
+<p>CORS is not a replacement for authentication. A developer should still protect private resources on the server. I would investigate a cross-origin browser error as a policy issue rather than assuming that the API is offline.</p>
+<pre><code>A server may explicitly allow a requesting origin:
+Access-Control-Allow-Origin: https://example.com
+
+This permits relevant browser access under CORS rules.
+It does not identify or authenticate an individual user.</code></pre>
+<p class="source-note">Read more: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">MDN: CORS</a>.</p></section><section><h2>Using the browser's Network panel</h2>
+<p>The Network panel in browser developer tools lists resource requests and their outcomes. Selecting an entry exposes details such as request and response fields, timing, and the returned content. Recording needs to be active while the page loads.</p>
+<p>For a missing stylesheet, I would reload with the panel open, locate the CSS request, and inspect its status and requested address. A 404 suggests checking the deployed path before rewriting the stylesheet's rules.</p>
+<p>A protocol column can help distinguish the negotiated HTTP version. Cache settings also affect observations, so I would note whether the test used the normal cache or deliberately disabled it. These are investigation steps, not measurements of this example site.</p>
+<p class="source-note">Read more: <a href="https://developer.chrome.com/docs/devtools/network/">Chrome: Network panel overview</a>.</p></section><p class="next-reading">Continue: <a href="versions.html">Modern versions</a></p></article>
+  </main>
+  <!-- The course link and class-project note appear consistently across the site. -->
+  <footer class="site-footer">
+    <p>Created by Xavier Hinesman · Fall 2026</p>
+    <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
+  </footer>
+</body>
+</html>
