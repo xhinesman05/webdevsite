@@ -1,70 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Student background and the purpose of this IT 3203 web development project.">
-  <meta name="author" content="Xavier Hinesman">
-  <title>About Xavier Hinesman | HTTP Explained</title>
-  <link rel="stylesheet" href="site.css">
-</head>
-<body>
-  <!-- The skip link lets keyboard users move past the shared navigation. -->
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="site-name" href="index.html">HTTP Explained</a>
-      <p class="site-description">The exchanges behind the page</p>
-      <!-- Every page keeps the same menu and identifies its current destination. -->
-      <nav aria-label="Main navigation"><ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="history.html">History</a></li>
-<li><a href="how-http-works.html">How HTTP works</a></li>
-<li><a href="versions.html">Modern versions</a></li>
-<li><a href="concepts.html">Key concepts</a></li>
-<li><a href="references.html">References</a></li>
-<li><a href="about.html" aria-current="page">About</a></li>
-</ul></nav>
-    </div>
-  </header>
-  <main id="main-content" tabindex="-1">
-    <div class="page-heading">
-      <p class="eyebrow">IT 3203 · Web technology research</p>
-      <h1>About Xavier Hinesman</h1>
-      <p class="lead">A student project connecting technical research with the experience of reading a website.</p>
-    </div>
-    <article class="reading-width">
-    <section><h2>Student profile</h2>
-<p>I am Xavier Hinesman, a student at Kennesaw State University taking Intro to Web Development in Fall 2026. This website develops my research into HTTP and its evolution into a resource that someone learning about the web can follow.</p>
-<p>I am interested in how the decisions behind a website affect the experience of using it. A page can look finished while a resource path, a navigation choice, or a form's behavior still needs work.</p></section>
-    <section><h2>Education and current work</h2>
-<dl class="profile-list">
-<dt>University</dt>
-<dd>Kennesaw State University</dd>
-<dt>Course</dt>
-<dd>IT 3203: Intro to Web Development, Fall 2026</dd>
-<dt>Current project</dt>
-<dd>HTTP research and a website presenting the protocol's development</dd>
-<dt>Related coursework</dt>
-<dd>Analysis of the HTML, CSS, layout, and usability of the BR Architects template</dd>
-</dl></section>
-    <section><h2>Skills in practice</h2>
-<ul>
-<li>Organizing content with semantic HTML and a consistent heading hierarchy.</li>
-<li>Using a shared CSS file, Grid, and Flexbox to keep pages consistent.</li>
-<li>Connecting visible page behavior with the rules or requests that produce it.</li>
-<li>Finding technical explanations in standards and developer documentation.</li>
-</ul></section>
-    <section><h2>Project purpose</h2>
-<p>I chose HTTP because it connects the visible page with the exchanges that make the page available. The website adapts my Assignment 1 research into topic pages, a concept reference, and a reading list. My goal is to explain each change in terms of the problem it addresses.</p>
-<p>The layout also applies lessons from Assignment 2. I kept navigation available, used meaningful headings, and placed styling in one file so a shared change can reach every page.</p>
-<p><a href="https://github.com/xhinesman05/webdevsite">View this project's repository on GitHub</a>.</p></section>
-    </article>
-  </main>
-  <!-- The course link and class-project note appear consistently across the site. -->
-  <footer class="site-footer">
-    <p>Created by Xavier Hinesman · Fall 2026</p>
-    <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
-  </footer>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Student background and the purpose of this IT 3203 web development project.">
+    <meta name="author" content="Xavier Hinesman">
+    <title>About Xavier Hinesman | HTTP Explained</title>
+    <link rel="stylesheet" href="site.css">
+  </head>
+  <body>
+    <!-- The skip link lets keyboard users move past the shared navigation. -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-name" href="index.html">HTTP Explained</a>
+        <p class="site-description">The exchanges behind the page</p>
+        <!-- Every page keeps the same menu and identifies its current destination. -->
+        <nav aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="index.html">Home</a>
+            </li>
+            <li>
+              <a href="history.html">History</a>
+            </li>
+            <li>
+              <a href="how-http-works.html">How HTTP works</a>
+            </li>
+            <li>
+              <a href="versions.html">Modern versions</a>
+            </li>
+            <li>
+              <a href="concepts.html">Key concepts</a>
+            </li>
+            <li>
+              <a href="references.html">References</a>
+            </li>
+            <li>
+              <a href="about.html" aria-current="page">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content" tabindex="-1">
+      <div class="page-heading">
+        <p class="eyebrow">IT 3203 · Web technology research</p>
+        <h1>About Xavier Hinesman</h1>
+        <p class="lead">A student project connecting technical research with the experience of reading a website.</p>
+      </div>
+      <div class="reading-width">
+        <section>
+          <h2>Student profile</h2>
+          <p>I am Xavier Hinesman, a student at Kennesaw State University taking Intro to Web Development in Fall 2026. This website develops my research into HTTP and its evolution into a resource that someone learning about the web can follow.</p>
+          <p>I am interested in how the decisions behind a website affect the experience of using it. A page can look finished while a resource path, a navigation choice, or a form's behavior still needs work.</p>
+        </section>
+        <section>
+          <h2>Education and current work</h2>
+          <dl class="profile-list">
+            <dt>University</dt>
+            <dd>Kennesaw State University</dd>
+            <dt>Course</dt>
+            <dd>IT 3203: Intro to Web Development, Fall 2026</dd>
+            <dt>Current project</dt>
+            <dd>HTTP research and a website presenting the protocol's development</dd>
+            <dt>Related coursework</dt>
+            <dd>Analysis of the HTML, CSS, layout, and usability of the BR Architects template</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Skills in practice</h2>
+          <ul>
+            <li>Organizing content with semantic HTML and a consistent heading hierarchy.</li>
+            <li>Using a shared CSS file, Grid, and Flexbox to keep pages consistent.</li>
+            <li>Connecting visible page behavior with the rules or requests that produce it.</li>
+            <li>Finding technical explanations in standards and developer documentation.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Project purpose</h2>
+          <p>I chose HTTP because it connects the visible page with the exchanges that make the page available. The website adapts my Assignment 1 research into topic pages, a concept reference, and a reading list. My goal is to explain each change in terms of the problem it addresses.</p>
+          <p>The layout also applies lessons from Assignment 2. I kept navigation available, used meaningful headings, and placed styling in one file so a shared change can reach every page.</p>
+          <p>
+            <a href="https://github.com/xhinesman05/webdevsite">View this project's repository on GitHub</a>.</p>
+        </section>
+      </div>
+    </main>
+    <!-- The course link and class-project note appear consistently across the site. -->
+    <footer class="site-footer">
+      <p>Created by Xavier Hinesman · Fall 2026</p>
+      <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
+    </footer>
+  </body>
 </html>

@@ -30,7 +30,7 @@ nav a:hover, nav a[aria-current="page"] { color: #fff; border-bottom-color: #fff
 .lead { color: #4b5e6d; max-width: 70ch; font-size: 1.15rem; margin-bottom: .4rem; }
 .reading-width { max-width: 82ch; }
 section { margin-top: 2.75rem; }
-article > section:first-child { margin-top: 0; }
+article > section:first-child, .reading-width > section:first-child { margin-top: 0; }
 .source-note { color: #53606b; font-size: .87rem; border-left: 3px solid #b7cbd9; padding: .4rem 0 .4rem 1rem; margin: 1rem 0 2rem; }
 /* Grid supplies a main article and a modest reading guide on the homepage. */
 .home-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 3rem; align-items: start; }
@@ -81,3 +81,4 @@ tbody th { min-width: 8rem; }
  .site-footer { padding: 1.5rem 1.2rem; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+

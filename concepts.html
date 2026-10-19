@@ -1,97 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Definitions and examples of seven concepts used throughout the HTTP research site.">
-  <meta name="author" content="Xavier Hinesman">
-  <title>Seven key concepts | HTTP Explained</title>
-  <link rel="stylesheet" href="site.css">
-</head>
-<body>
-  <!-- The skip link lets keyboard users move past the shared navigation. -->
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="site-name" href="index.html">HTTP Explained</a>
-      <p class="site-description">The exchanges behind the page</p>
-      <!-- Every page keeps the same menu and identifies its current destination. -->
-      <nav aria-label="Main navigation"><ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="history.html">History</a></li>
-<li><a href="how-http-works.html">How HTTP works</a></li>
-<li><a href="versions.html">Modern versions</a></li>
-<li><a href="concepts.html" aria-current="page">Key concepts</a></li>
-<li><a href="references.html">References</a></li>
-<li><a href="about.html">About</a></li>
-</ul></nav>
-    </div>
-  </header>
-  <main id="main-content" tabindex="-1">
-    <div class="page-heading">
-      <p class="eyebrow">IT 3203 · Web technology research</p>
-      <h1>Seven key concepts</h1>
-      <p class="lead">Short definitions, with examples drawn from an ordinary website.</p>
-    </div>
-    <article class="reading-width"><p>These definitions provide a reference for the rest of the site. I find the examples useful because the terms describe specific parts of an exchange that are easy to confuse when a page fails to load.</p>
-<dl class="concept-list">
-<div class="concept">
-<dt>Client and server</dt>
-<dd>
-<p>A client initiates a request, and a server responds to it. A browser commonly acts as the client. The roles describe an exchange, rather than two permanent categories of computer.</p>
-<p class="example"><strong>Example:</strong> A browser requesting index.html acts as the client.</p>
-</dd>
-</div>
-<div class="concept">
-<dt>Resource</dt>
-<dd>
-<p>A resource is the target identified by a URI. Its representation is the information transferred about it, such as an HTML document or JSON data. A resource and one returned file are not always the same thing.</p>
-<p class="example"><strong>Example:</strong> An article address can identify a resource whose current representation is HTML.</p>
-</dd>
-</div>
-<div class="concept">
-<dt>Request and response</dt>
-<dd>
-<p>A request describes what the client wants to do. A response communicates the result with a status and relevant fields, plus content when appropriate. One visible page may depend on several of these exchanges.</p>
-<p class="example"><strong>Example:</strong> The HTML document and its stylesheet can arrive through separate requests.</p>
-</dd>
-</div>
-<div class="concept">
-<dt>Method</dt>
-<dd>
-<p>A method gives a request its intended action. GET requests a representation, while POST asks the target resource to process supplied content. Choosing a method does not itself encrypt the exchange.</p>
-<p class="example"><strong>Example:</strong> GET /lesson.html requests a lesson representation.</p>
-</dd>
-</div>
-<div class="concept">
-<dt>Status code</dt>
-<dd>
-<p>A status code communicates the result in a form software can recognize. A successful retrieval commonly returns 200, while 404 indicates that a current target representation was not found.</p>
-<p class="example"><strong>Example:</strong> A wrong image path may return 404 even when the main page loads.</p>
-</dd>
-</div>
-<div class="concept">
-<dt>Cache</dt>
-<dd>
-<p>A cache stores a response for possible reuse under HTTP caching rules. Freshness and validation determine when a stored copy can satisfy another request. Reuse can reduce both waiting and network traffic.</p>
-<p class="example"><strong>Example:</strong> A stored stylesheet may be reused while it remains fresh.</p>
-</dd>
-</div>
-<div class="concept">
-<dt>Multiplexing</dt>
-<dd>
-<p>Multiplexing allows several logical streams to share a connection. HTTP/2 interleaves frames on TCP, while HTTP/3 maps exchanges onto QUIC streams. The transport beneath the streams affects how missing data causes delay.</p>
-<p class="example"><strong>Example:</strong> A stylesheet stream and an image stream can share an HTTP/2 connection.</p>
-</dd>
-</div>
-</dl>
-<p class="source-note">Read more: <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods">MDN: Request methods</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">MDN: Status codes</a>, <a href="https://www.rfc-editor.org/rfc/rfc9111">RFC 9111: HTTP Caching</a>, <a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a>, <a href="https://www.rfc-editor.org/rfc/rfc9114">RFC 9114: HTTP/3</a>.</p>
-<p class="next-reading">Continue: <a href="references.html">References and further reading</a></p></article>
-  </main>
-  <!-- The course link and class-project note appear consistently across the site. -->
-  <footer class="site-footer">
-    <p>Created by Xavier Hinesman · Fall 2026</p>
-    <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
-  </footer>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Definitions and examples of seven concepts used throughout the HTTP research site.">
+    <meta name="author" content="Xavier Hinesman">
+    <title>Seven key concepts | HTTP Explained</title>
+    <link rel="stylesheet" href="site.css">
+  </head>
+  <body>
+    <!-- The skip link lets keyboard users move past the shared navigation. -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-name" href="index.html">HTTP Explained</a>
+        <p class="site-description">The exchanges behind the page</p>
+        <!-- Every page keeps the same menu and identifies its current destination. -->
+        <nav aria-label="Main navigation">
+          <ul>
+            <li>
+              <a href="index.html">Home</a>
+            </li>
+            <li>
+              <a href="history.html">History</a>
+            </li>
+            <li>
+              <a href="how-http-works.html">How HTTP works</a>
+            </li>
+            <li>
+              <a href="versions.html">Modern versions</a>
+            </li>
+            <li>
+              <a href="concepts.html" aria-current="page">Key concepts</a>
+            </li>
+            <li>
+              <a href="references.html">References</a>
+            </li>
+            <li>
+              <a href="about.html">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content" tabindex="-1">
+      <div class="page-heading">
+        <p class="eyebrow">IT 3203 · Web technology research</p>
+        <h1>Seven key concepts</h1>
+        <p class="lead">Short definitions, with examples drawn from an ordinary website.</p>
+      </div>
+      <div class="reading-width">
+        <p>These definitions provide a reference for the rest of the site. I find the examples useful because the terms describe specific parts of an exchange that are easy to confuse when a page fails to load.</p>
+        <dl class="concept-list">
+          <div class="concept">
+            <dt>Client and server</dt>
+            <dd>
+              <p>A client initiates a request, and a server responds to it. A browser commonly acts as the client. The roles describe an exchange, rather than two permanent categories of computer.</p>
+              <p class="example">
+                <strong>Example:</strong> A browser requesting index.html acts as the client.</p>
+            </dd>
+          </div>
+          <div class="concept">
+            <dt>Resource</dt>
+            <dd>
+              <p>A resource is the target identified by a URI. Its representation is the information transferred about it, such as an HTML document or JSON data. A resource and one returned file are not always the same thing.</p>
+              <p class="example">
+                <strong>Example:</strong> An article address can identify a resource whose current representation is HTML.</p>
+            </dd>
+          </div>
+          <div class="concept">
+            <dt>Request and response</dt>
+            <dd>
+              <p>A request describes what the client wants to do. A response communicates the result with a status and relevant fields, plus content when appropriate. One visible page may depend on several of these exchanges.</p>
+              <p class="example">
+                <strong>Example:</strong> The HTML document and its stylesheet can arrive through separate requests.</p>
+            </dd>
+          </div>
+          <div class="concept">
+            <dt>Method</dt>
+            <dd>
+              <p>A method gives a request its intended action. GET requests a representation, while POST asks the target resource to process supplied content. Choosing a method does not itself encrypt the exchange.</p>
+              <p class="example">
+                <strong>Example:</strong> GET /lesson.html requests a lesson representation.</p>
+            </dd>
+          </div>
+          <div class="concept">
+            <dt>Status code</dt>
+            <dd>
+              <p>A status code communicates the result in a form software can recognize. A successful retrieval commonly returns 200, while 404 indicates that a current target representation was not found.</p>
+              <p class="example">
+                <strong>Example:</strong> A wrong image path may return 404 even when the main page loads.</p>
+            </dd>
+          </div>
+          <div class="concept">
+            <dt>Cache</dt>
+            <dd>
+              <p>A cache stores a response for possible reuse under HTTP caching rules. Freshness and validation determine when a stored copy can satisfy another request. Reuse can reduce both waiting and network traffic.</p>
+              <p class="example">
+                <strong>Example:</strong> A stored stylesheet may be reused while it remains fresh.</p>
+            </dd>
+          </div>
+          <div class="concept">
+            <dt>Multiplexing</dt>
+            <dd>
+              <p>Multiplexing allows several logical streams to share a connection. HTTP/2 interleaves frames on TCP, while HTTP/3 maps exchanges onto QUIC streams. The transport beneath the streams affects how missing data causes delay.</p>
+              <p class="example">
+                <strong>Example:</strong> A stylesheet stream and an image stream can share an HTTP/2 connection.</p>
+            </dd>
+          </div>
+        </dl>
+        <p class="source-note">Read more: <a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods">MDN: Request methods</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status">MDN: Status codes</a>, <a href="https://www.rfc-editor.org/rfc/rfc9111">RFC 9111: HTTP Caching</a>, <a href="https://www.rfc-editor.org/rfc/rfc9113">RFC 9113: HTTP/2</a>, <a href="https://www.rfc-editor.org/rfc/rfc9114">RFC 9114: HTTP/3</a>.</p>
+        <p class="next-reading">Continue: <a href="references.html">References and further reading</a>
+        </p>
+      </div>
+    </main>
+    <!-- The course link and class-project note appear consistently across the site. -->
+    <footer class="site-footer">
+      <p>Created by Xavier Hinesman · Fall 2026</p>
+      <p>This website is a class project for <a href="https://ksuweb.github.io/IT3203/">IT 3203: Intro to Web Development</a> at Kennesaw State University.</p>
+    </footer>
+  </body>
 </html>
